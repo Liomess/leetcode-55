@@ -1,0 +1,26 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n=len(nums)
+        ans=["f"]*(n-1)
+        ans.append("t")
+        i=n-2
+        while i>=0:
+            count=0
+            if nums[i]==0:
+                ans[i]="f"
+                i-=1
+            else:
+                for j in range(nums[i]):
+                    jump=j+1
+                    if ans[i+jump]=="t" and (i+jump)<=(n-1):
+                        count=1
+                        break
+                if count==1:
+                    ans[i]="t"
+                else:
+                    ans[i]="f"
+                i-=1
+        if ans[0]=="t":
+            return True
+        else:
+            return False
